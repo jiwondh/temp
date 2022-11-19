@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/assets/images/logo.png">
+
+<title>[Kotlin] 클래스(Class)와 생성자(Constructor) | Jiwon Blog</title>
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>[Kotlin] 클래스(Class)와 생성자(Constructor) | Jiwon Blog</title>
+<meta name="generator" content="Jekyll v4.3.1" />
+<meta property="og:title" content="[Kotlin] 클래스(Class)와 생성자(Constructor)" />
+<meta name="author" content="jiwon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kotlin 클래스와 생성자" />
+<meta property="og:description" content="Kotlin 클래스와 생성자" />
+<link rel="canonical" href="http://localhost:4000/kotlin_classes/" />
+<meta property="og:url" content="http://localhost:4000/kotlin_classes/" />
+<meta property="og:site_name" content="Jiwon Blog" />
+<meta property="og:image" content="http://localhost:4000/assets/images/kotlin_front.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-12-31T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/images/kotlin_front.webp" />
+<meta property="twitter:title" content="[Kotlin] 클래스(Class)와 생성자(Constructor)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"jiwon"},"dateModified":"2018-12-31T00:00:00+09:00","datePublished":"2018-12-31T00:00:00+09:00","description":"Kotlin 클래스와 생성자","headline":"[Kotlin] 클래스(Class)와 생성자(Constructor)","image":"http://localhost:4000/assets/images/kotlin_front.webp","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/kotlin_classes/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/logo.png"},"name":"jiwon"},"url":"http://localhost:4000/kotlin_classes/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+<link href="/assets/css/screen.css" rel="stylesheet">
+
+<link href="/assets/css/main.css" rel="stylesheet">
+
+<script src="/assets/js/jquery.min.js"></script>
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+    <img src="/assets/images/logo.png" alt="Jiwon Blog">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/index.html">Blog</a>
+                </li>
+
+<!--                <li class="nav-item">-->
+<!--                <a class="nav-link" href="/about">About</a>-->
+<!--                </li>-->
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Jiwon Blog</h1>
+    <p class="lead">
+        개발 이야기
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=[Kotlin] 클래스(Class)와 생성자(Constructor)&url=http://localhost:4000/kotlin_classes/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/kotlin_classes/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/kotlin_classes/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+                <!-- Post Title -->
+                <h1 class="posttitle">[Kotlin] 클래스(Class)와 생성자(Constructor)</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/kotlin_front.webp" alt="[Kotlin] 클래스(Class)와 생성자(Constructor)">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                    
+                    <div class="toc mt-4 mb-4 lead">
+                        <h3 class="font-weight-bold">Summary</h3>
+                        <ul>
+  <li><a href="#kotlin-클래스와-생성자">Kotlin 클래스와 생성자</a>
+    <ul>
+      <li><a href="#클래스">클래스</a>
+        <ul>
+          <li><a href="#class-키워드"><code class="language-plaintext highlighter-rouge">class</code> 키워드</a></li>
+          <li><a href="#kotlin-클래스-생성하기">Kotlin 클래스 생성하기</a></li>
+        </ul>
+      </li>
+      <li><a href="#생성자">생성자</a>
+        <ul>
+          <li><a href="#constructor--키워드"><code class="language-plaintext highlighter-rouge">constructor</code>  키워드</a></li>
+          <li><a href="#기본-생성자primary-constructor">기본 생성자(primary constructor)</a></li>
+          <li><a href="#init-키워드"><code class="language-plaintext highlighter-rouge">init</code> 키워드</a></li>
+          <li><a href="#보조-생성자secondary-constructors">보조 생성자(Secondary Constructors)</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+                    </div>
+                
+                <!-- End Toc -->
+                <h1 id="kotlin-클래스와-생성자">Kotlin 클래스와 생성자</h1>
+
+<h2 id="클래스">클래스</h2>
+
+<h3 id="class-키워드"><code class="language-plaintext highlighter-rouge">class</code> 키워드</h3>
+
+<ul>
+  <li>Kotlin 클래스는 <code class="language-plaintext highlighter-rouge">class</code> 키워드를 사용하여 선언합니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li><strong>클래스 선언부</strong>는 아래와 같이 구성됩니다.
+    <ul>
+      <li>클래스 <u>이름</u></li>
+      <li>클래스 <u>헤더</u>(클래스 타입 파라미터 <code class="language-plaintext highlighter-rouge">&lt;T&gt;</code>, 기본 생성자 <code class="language-plaintext highlighter-rouge">constructor</code> 등),</li>
+      <li>중괄호<code class="language-plaintext highlighter-rouge">{ }</code>로 둘러 싸인 클래스 <u>바디</u></li>
+    </ul>
+  </li>
+  <li>클래스 헤더와 바디는 optional이므로, 바디가 없다면 중괄호 <code class="language-plaintext highlighter-rouge">{ }</code>를 생략할 수 있습니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Empty</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><br /></p>
+<h3 id="kotlin-클래스-생성하기">Kotlin 클래스 생성하기</h3>
+
+<ul>
+  <li>Intellij 상단 메뉴에서 <code class="language-plaintext highlighter-rouge">[File] - [New] - [Kotlin File/Class]</code> 클릭합니다.</li>
+</ul>
+
+<p><img src="https://farm8.staticflickr.com/7839/31601763357_23d5d95572_o.png" alt="image-20190101001008678" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">[Class]</code> 를 선택하고 생성합니다.</li>
+</ul>
+
+<p><img src="https://farm5.staticflickr.com/4806/45628599865_4421e59c85_o.png" alt="image-20190101001942313" /></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Person.kt</code> 파일이 생성됩니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c1">// Person.kt</span>
+<span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><br /></p>
+<h2 id="생성자">생성자</h2>
+
+<h3 id="constructor--키워드"><code class="language-plaintext highlighter-rouge">constructor</code>  키워드</h3>
+
+<ul>
+  <li><strong>Java와 비교</strong>  - Java는 생성자를 클래스 내부에 선언해야합니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="c1">// Person.java</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="nc">Person</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>Kotlin은 <code class="language-plaintext highlighter-rouge">constructor</code> 키워드를 사용하여 생성자를 <strong>클래스 선언부(기본 생성자)</strong>나 <strong>클래스 내부(보조 생성자)</strong>에 선언할 수 있습니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c1">// Person.kt - 기본 생성자</span>
+<span class="kd">class</span> <span class="nc">Person</span> <span class="nf">constructor</span><span class="o">(</span><span class="nl">firstName:</span> <span class="nc">String</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="o">...</span> 
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<p><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-8753021586186085" data-ad-slot="8878745802">
+</ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<p><br /></p>
+<h3 id="기본-생성자primary-constructor">기본 생성자(primary constructor)</h3>
+
+<ul>
+  <li>기본 생성자는 클래스 <u>헤더</u>의 한 부분으로, 클래스 이름 뒤(타입 파라미터 <code class="language-plaintext highlighter-rouge">&lt;T&gt;</code> 가 있다면 그 뒤)에 위치합니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Person</span> <span class="nf">constructor</span><span class="o">(</span><span class="nl">firstName:</span> <span class="nc">String</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>기본 생성자에 <strong>애노테이션(annotations)</strong><sup id="fnref:annotation" role="doc-noteref"><a href="#fn:annotation" class="footnote" rel="footnote">1</a></sup>이나 <strong>접근 제한자(visibility modifiers)</strong><sup id="fnref:visibility_modifiers" role="doc-noteref"><a href="#fn:visibility_modifiers" class="footnote" rel="footnote">2</a></sup>가 없다면 <code class="language-plaintext highlighter-rouge">constructor</code> 키워드를 생략할 수 있습니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c1">// Person.kt - constructor 키워드 생략 가능</span>
+<span class="kd">class</span> <span class="nf">Person</span><span class="o">(</span><span class="nl">firstName:</span> <span class="nc">String</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="o">...</span> 
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c1">// Customer.kt - constructor 키워드 생략 불가능</span>
+<span class="kd">class</span> <span class="nc">Customer</span> <span class="kd">public</span> <span class="nd">@Inject</span> <span class="n">constructor</span><span class="o">(</span><span class="nl">name:</span> <span class="nc">String</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="o">...</span> 
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>기본 생성자의 파라미터는 클래스 바디에 선언된 <strong>프로퍼티 초기화</strong>에도 사용할 수 있습니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nf">Customer</span><span class="o">(</span><span class="nl">name:</span> <span class="nc">String</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 프로퍼티 customerKey 초기화에 name 파리미터 사용</span>
+    <span class="n">val</span> <span class="n">customerKey</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">()</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>코틀린은 <u>기본 생성자에서 프로퍼티를 선언하고 초기화</u>하는 간결한 구문을 제공합니다. <br /> (<code class="language-plaintext highlighter-rouge">var</code> 와  <code class="language-plaintext highlighter-rouge">val</code> <sup id="fnref:Defining_variables" role="doc-noteref"><a href="#fn:Defining_variables" class="footnote" rel="footnote">3</a></sup>)</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nf">Person</span><span class="o">(</span><span class="n">val</span> <span class="nl">firstName:</span> <span class="nc">String</span><span class="o">,</span> <span class="n">val</span> <span class="nl">lastName:</span> <span class="nc">String</span><span class="o">,</span> <span class="kt">var</span> <span class="nl">age:</span> <span class="nc">Int</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="o">...</span> 
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><br /></p>
+<h3 id="init-키워드"><code class="language-plaintext highlighter-rouge">init</code> 키워드</h3>
+
+<ul>
+  <li>코틀린에서는 <strong>기본 생성자</strong>가 클래스 선언부에 위치하므로 바디를 가질 수 없는 구조입니다.</li>
+  <li>대신, <code class="language-plaintext highlighter-rouge">init{}</code> 함수 안에 초기화 코드를 작성하여 기본 생성자의 인자값을 처리할 수 있습니다.</li>
+  <li>인스턴스가 초기화되는 동안, <code class="language-plaintext highlighter-rouge">init{}</code> 함수는 프로퍼티 초기화와 함께 <strong>클래스 바디에 선언된 순서</strong>대로 실행됩니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nf">InitOrderDemo</span><span class="o">(</span><span class="nl">name:</span> <span class="nc">String</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">val</span> <span class="n">firstProperty</span> <span class="o">=</span> <span class="s">"First property: $name"</span><span class="o">.</span><span class="na">also</span><span class="o">(::</span><span class="n">println</span><span class="o">)</span>
+    
+    <span class="n">init</span> <span class="o">{</span>
+        <span class="n">println</span><span class="o">(</span><span class="s">"First initializer block that prints ${name}"</span><span class="o">)</span>
+    <span class="o">}</span>
+    
+    <span class="n">val</span> <span class="n">secondProperty</span> <span class="o">=</span> <span class="s">"Second property: ${name.length}"</span><span class="o">.</span><span class="na">also</span><span class="o">(::</span><span class="n">println</span><span class="o">)</span>
+    
+    <span class="n">init</span> <span class="o">{</span>
+        <span class="n">println</span><span class="o">(</span><span class="s">"Second initializer block that prints ${name.length}"</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><strong>실행결과</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>First property: hello
+First initializer block that prints hello
+Second property: 5
+Second initializer block that prints 5
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><br /></p>
+<h3 id="보조-생성자secondary-constructors">보조 생성자(Secondary Constructors)</h3>
+
+<ul>
+  <li>클래스 바디 내부에 보조생성자를 생성할 수 있습니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="n">constructor</span><span class="o">(</span><span class="nl">parent:</span> <span class="nc">Person</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">parent</span><span class="o">.</span><span class="na">children</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>클래스에 <u>기본 생성자가 있으면</u>,  각 보조 생성자는 <strong><code class="language-plaintext highlighter-rouge">this</code> 키워드</strong>를 사용하여 <strong>직접 기본생성자</strong>에게, 또는 <strong>다른 보조 생성자를 통해 간접적으로 기본생성자</strong>에게 위임을 해야합니다.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">this</code> 키워드</strong>는 <u>기본 생성자의 속성을 상속받아 처리</u>되는 형식입니다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nf">Person</span><span class="o">(</span><span class="n">val</span> <span class="nl">name:</span> <span class="nc">String</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">constructor</span><span class="o">(</span><span class="nl">name:</span> <span class="nc">String</span><span class="o">,</span> <span class="nl">parent:</span> <span class="nc">Person</span><span class="o">)</span> <span class="o">:</span> <span class="k">this</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">parent</span><span class="o">.</span><span class="na">children</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">this</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:annotation" role="doc-endnote">
+      <p>코드에 메타데이터를 붙이는 방법 (ex. <code class="language-plaintext highlighter-rouge">@Inject</code>) <br /> <a href="https://kotlinlang.org/docs/reference/annotations.html" target="_blank">Kotlin Reference - Annotations</a> <a href="#fnref:annotation" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:visibility_modifiers" role="doc-endnote">
+      <p>코틀린에는 4개의 접근 제한자가 있습니다 <br /> (ex.  <code class="language-plaintext highlighter-rouge">private</code> ,  <code class="language-plaintext highlighter-rouge">protected</code> ,  <code class="language-plaintext highlighter-rouge">internal</code> ,  <code class="language-plaintext highlighter-rouge">public</code> ) <br /> <a href="https://kotlinlang.org/docs/reference/visibility-modifiers.html" target="_blank">Kotlin Reference - Visibility Modifiers</a> <a href="#fnref:visibility_modifiers" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:Defining_variables" role="doc-endnote">
+      <p><code class="language-plaintext highlighter-rouge">var</code> :  수정이 가능한 변수<br /><code class="language-plaintext highlighter-rouge">val</code> : 수정이 불가능한 변수 <br /><a href="https://kotlinlang.org/docs/reference/basic-syntax.html#defining-variables" target="_blank">Kotlin Reference - Defining variables</a> <a href="#fnref:Defining_variables" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2018-12-31">31 Dec 2018</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#Kotlin">Kotlin</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/powerful-things-markdown-editor/"> &laquo; Powerful things you can do with the Markdown editor</a>
+            
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'demowebsite'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/categories#Jekyll">Jekyll (14)</a>
+                
+                    <a class="mt-1 mb-1" href="/categories#tutorial">tutorial (12)</a>
+                
+                    <a class="mt-1 mb-1" href="/categories#hello">hello (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/categories#web-development">web development (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/categories#Kotlin">Kotlin (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2022 Jiwon Blog 
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script> 
+
+
+<script id="dsq-count-scr" src="//demowebsite.disqus.com/count.js"></script>
+
+
+</body>
+</html>
