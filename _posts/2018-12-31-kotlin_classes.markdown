@@ -4,9 +4,16 @@ title: "[Kotlin] 클래스(Class)와 생성자(Constructor)"
 author: jiwon
 date: 2018-12-31
 categories: [ Kotlin ]
-image: assets/images/kotlin_front.webp
+image: assets/images/kotlin2.png
 toc: true
+featured: true
+hidden: true
+[//]: # (rating: .5)
 ---
+
+Kotlin의 클래스와 생성자에 대하여 알아보아요.
+
+<br/>
 
 # Kotlin 클래스와 생성자
 

@@ -1,0 +1,26 @@
+---
+layout: post
+title: "[C++] 입력 개수 모를 때 입력 받기"
+author: jiwon
+date: 2017-09-23
+categories: [ Algorithm ]
+image: assets/images/c++.png
+toc: false
+featured: false
+hidden: false
+[//]: # (rating: .5)
+---
+
+입력 개수가 주어지지 않고 **입력이 끝날 때까지 입력 받아야 되는 경우** 구현 방법을 알아봅시다.
+
+<br/>
+
+### 코드
+
+<script src="https://gist.github.com/jiwondh/be011dbd3bcc3e4cd43e1a17a0cd748b.js"></script>
+
+<br/>
+
+### 실행 결과
+
+![A5B92D71-6BC9-4F68-9E5F-BE7DBDB4D41B](https://farm5.staticflickr.com/4466/36997804914_4691cd2c7b_o.png)

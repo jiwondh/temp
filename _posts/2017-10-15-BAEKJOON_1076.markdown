@@ -1,0 +1,36 @@
+---
+layout: post
+title: "[백준 BOJ] 1076 저항"
+author: jiwon
+date: 2017-10-15
+categories: [ Algorithm Problem ]
+image: assets/images/baekjoon.png
+toc: false
+featured: false
+hidden: false
+[//]: # (rating: .5)
+---
+
+> 전자 제품에는 저항이 들어간다. 저항은 색 3개를 이용해서 그 저항이 몇 옴인지 나타낸다. 처음 색 2개는 저항의 값이고, 마지막 색은 곱해야 하는 값이다. 저항의 값은 다음 표를 이용해서 구한다..
+
+문제로 이동할려면 [여기](https://www.acmicpc.net/problem/1076){: target="_blank" }를 클릭하세요.
+
+## 풀이
+
+- STL map을 이용해서 계산하면 해당 색깔의 값과 곱에 바로 접근할 수 있습니다.
+- 값이 `int`범위를 넘어가므로 `long long`을 사용하세요
+
+
+## 코드  
+
+
+<script src="https://gist.github.com/jiwondh/d24d221a26c1ce2ec34de18584c28de8.js"></script>
+
+
+
+
+
+
+
+
+
